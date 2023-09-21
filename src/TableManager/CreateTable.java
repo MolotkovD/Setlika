@@ -10,7 +10,7 @@ public class CreateTable {
 
     private final byte[] HeadContext = new byte[128];
 
-    private final byte NameSize = 96;
+    private final byte NameSize = 127;
     private final byte VersionSize = 6;
     private final byte DateSize = 8;
     private final byte CountTableSize = 18;
