@@ -1,8 +1,5 @@
 import TableManager.CreateTable;
 
-import java.io.IOException;
-import java.lang.reflect.Array;
-import java.nio.charset.StandardCharsets;
 
 public class Main{
     public static void main(String[] args){
