@@ -10,6 +10,7 @@ public class CreateTable {
     public void CreateDataBase(String NameBase){
         System.arraycopy(NameBase.getBytes(),0, this.NameDB,0, 24);
     }
+    public byte[] GetName(){return this.NameDB;}
     public void AddTablet(String TableName, String[][] input_column){
         System.out.println(TableName);
         for (String[] row: input_column) {
