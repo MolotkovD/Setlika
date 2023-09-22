@@ -7,7 +7,8 @@ public class Main{
     public static void main(String[] args){
         System.out.println("Start App!");
 
-
-        System.out.print(" ");
+        BFileManager fs = new BFileManager("DataNNN");
+        fs.AddTable("t1");
+        fs.Save();
     }
 }
