@@ -1,14 +1,16 @@
-import TableManager.CreateTable;
+import FileSystem.CreateFileDB;
+import GlobalValue.GlobalValue;
 
-import java.util.Arrays;
-
+import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class Main{
     public static void main(String[] args){
-        System.out.println("Start App!");
+        Scanner scanner = new Scanner(System.in);
 
-        BFileManager fs = new BFileManager("DataNNN");
-        fs.AddTable("t1");
-        fs.Save();
-    }
+        System.out.println("Directory BD:");
+        GlobalValue.pathToDBDirectory = Paths.get(scanner.nextLine());
+        System.out.println("Name BD:");
+        CreateFileDB.CreateNewDB(scanner.nextLine());
+}
 }
