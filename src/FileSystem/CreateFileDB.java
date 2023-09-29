@@ -1,36 +1,42 @@
 package FileSystem;
 
 
+import Enums.SLError;
 import GlobalValue.GlobalValue;
 import Utilities.Converters.Resizer;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
 public class CreateFileDB {
 
-    public static void CreateNewDB(String name){
+    public static SLError CreateNewDB(String name){
     try
     {
+
         Path localDirectory = GlobalValue.pathToDBDirectory.resolve(String.format("%s", name));
         Files.createDirectory(localDirectory);
+
         Files.createDirectory(localDirectory.resolve("Tables"));
         Files.createDirectory(localDirectory.resolve("BackUps"));
         Files.createDirectory(localDirectory.resolve("Cache"));
+        Files.createDirectory(localDirectory.resolve("Rules"));
+
         Files.createFile(localDirectory.resolve(String.format("%s.mmi", name)));
         Files.write(localDirectory.resolve(String.format("%s.mmi", name)), GenHead(name));
 
+        return SLError.CREATE_DATABASE_OK;
     }
     catch (IOException error)
     {
         System.out.println(
                 error.getMessage()
         );
+        return SLError.CREATE_DATABASE_ERROR;
     }
 
 }
