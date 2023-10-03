@@ -25,21 +25,20 @@ public class ClientHandler implements Runnable {
 
     private boolean LogIn(){
         boolean res;
-        String Login, Password;
+        String LoginKey;
 
         try {
-            this.bufferOut.write("Login@: ");
+            this.bufferOut.write("Key@\r ");
             this.bufferOut.flush();
-            Login = this.bufferIn.readLine();
-            this.bufferOut.write("Password@: ");
-            this.bufferOut.flush();
-            Password = this.bufferIn.readLine();
-            res = Login.equals(Password);
+            LoginKey = this.bufferIn.readLine();
+            res = LoginKey.equals("123");
+
 
         } catch (
                 IOException e
         ){
             System.out.println(e.getMessage());
+            closeConnect();
             res = false;
         }
 
@@ -52,10 +51,8 @@ public class ClientHandler implements Runnable {
             this.clientSocket.close();
             this.bufferOut.close();
             this.bufferIn.close();
-            System.out.println(
-                    "Close"
-            );
-        }catch (IOException e){
+            System.out.println("Close");
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -82,4 +79,5 @@ public class ClientHandler implements Runnable {
             closeConnect();
         }
     }
+
 }

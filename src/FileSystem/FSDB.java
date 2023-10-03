@@ -21,9 +21,14 @@ public class FSDB {
         return Files.newOutputStream(localDirectory.resolve(name + ".mmi"));
     }
 
-    public void InitBase(String name){
-    try
+
+
+    public void InitBase(String name)
     {
+
+
+        try
+            {
 
         localDirectory = localDirectory.resolve(name);
         Files.createDirectory(localDirectory);
@@ -40,13 +45,13 @@ public class FSDB {
         input.flush();
         input.close();
 
-    }
-    catch (IOException error)
-    {
+        }
+        catch (IOException error)
+        {
         System.out.println(
                 error.getMessage()
-        );
-    }
+            );
+        }
 
    }
 

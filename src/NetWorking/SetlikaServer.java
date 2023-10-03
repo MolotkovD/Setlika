@@ -7,16 +7,13 @@ import java.net.Socket;
 
 public class SetlikaServer {
     private ServerSocket server;
+    private boolean WorkServer = true;
     public void StartServer(int port) {
         try {
-
-            // server is listening on port 1234
             server = new ServerSocket(port);
-            while (true) {
+            while (this.WorkServer) {
                 Socket client = server.accept();
-                System.out.println("New client connected "
-                        + client.getInetAddress()
-                        .getHostAddress());
+                System.out.println("New client connected " + client.getInetAddress().getHostAddress());
                 ClientHandler clientSock = new ClientHandler(client);
                 new Thread(clientSock).start();
             }
@@ -35,6 +32,11 @@ public class SetlikaServer {
             }
         }
     }
+
+    public void StopServer(){
+        this.WorkServer = false;
+    }
+
 }
 
 
