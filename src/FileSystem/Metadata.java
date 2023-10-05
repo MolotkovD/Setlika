@@ -1,9 +1,10 @@
 package FileSystem;
-import GlobalValue.GlobalValue;
-import Utilities.Converters.Resizer;
+
+import GeneralCore.GlobalValue;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
 public class Metadata {
     public static byte[] GetMetaBlock(String name) {
         byte[] context = new byte[272];
