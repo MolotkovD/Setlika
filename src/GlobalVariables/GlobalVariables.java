@@ -9,7 +9,7 @@ import java.nio.file.Path;
  */
 public class GlobalVariables {
 
-    /**SLVersion - SetLika Version*/
+    /**SLVersion - Setlika Version*/
     static public String SLVersion = "SL1.00";
 
     /** Meta file of DataBase */

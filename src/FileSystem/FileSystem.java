@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 
-
 public class FileSystem {
     public void InitFileSystem(Path path, String name)
     {
@@ -37,6 +36,17 @@ public class FileSystem {
 
     }
 
+    public void CreateNewTable(String name) throws IOException{
+        Path tempDir = GlobalVariables.TablesFolder.resolve(name);
+        Files.createDirectory(tempDir);
+        Files.createDirectory(tempDir.resolve("Indices"));
+        Files.createDirectory(tempDir.resolve("Fields"));
+        Path metaTable = Files.createFile(tempDir.resolve(
+                name + ".ti"
+        ));
 
+
+
+    }
 
 }
