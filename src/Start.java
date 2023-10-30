@@ -9,11 +9,28 @@ public class Start {
     public static void main(String[] args) {
         String FilePathDebug = "D:\\Users\\molotkov.d\\Desktop\\Setlikatests";
 
+        System.out.println(
+                """
+                   ╔══════════════════════════════════════════════════════╗
+                   ║                                                      ║
+                   ║ ███████╗███████╗████████╗██╗     ██╗██╗  ██╗ █████╗  ║
+                   ║ ██╔════╝██╔════╝╚══██╔══╝██║     ██║██║ ██╔╝██╔══██╗ ║
+                   ║ ███████╗█████╗     ██║   ██║     ██║█████╔╝ ███████║ ║
+                   ║ ╚════██║██╔══╝     ██║   ██║     ██║██╔═██╗ ██╔══██║ ║
+                   ║ ███████║███████╗   ██║   ███████╗██║██║  ██╗██║  ██║ ║
+                   ║ ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ║
+                   ║                                                      ║
+                   ║ Verson: SL1.00  *                                    ║
+                   ║                                                      ║
+                   ╚══════════════════════════════════════════════════════╝"""
+        );
+
 
         FileSystem fs = new FileSystem();
         Scanner scan = new Scanner(System.in);
         GlobalVariables.FS = fs;
         fs.InitFileSystem(Paths.get(FilePathDebug), scan.nextLine());
+
         try {
             fs.CreateNewTable("Table1");
         }
