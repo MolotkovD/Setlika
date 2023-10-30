@@ -9,6 +9,7 @@ public class Start {
     public static void main(String[] args) {
         String FilePathDebug = "D:\\Users\\molotkov.d\\Desktop\\Setlikatests";
 
+        //<editor-fold desc="Logo">
         System.out.println(
                 """
                    ╔══════════════════════════════════════════════════════╗
@@ -24,6 +25,7 @@ public class Start {
                    ║                                                      ║
                    ╚══════════════════════════════════════════════════════╝"""
         );
+        //</editor-fold>
 
 
         FileSystem fs = new FileSystem();
