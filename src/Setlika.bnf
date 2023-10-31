@@ -1,0 +1,27 @@
+<stmt> ::= <create_stmt> | <drop_stmt> | <insert_stmt> | <update_stmt> | <delete_stmt> | <select_stmt>
+
+<create_stmt> ::= "CREATE" <spaces> "TABLE" <spaces> <existence>? <table_name> <spaces> "(" <unspaces> <columns_def> <unspaces> ")" <unspaces> ";"
+<drop_stmt>   ::= "DROP" <spaces> "TABLE" <spaces> <table_name> <unspaces> ";"
+<insert_stmt> ::= "INSERT" <spaces> "INTO" <spaces> <table_name> <spaces> "(" <unspaces> <fields_name> <unspaces> ")" <spaces> "VALUES" <spaces> "(" <unspaces> <values> <unspaces> ")" <unspaces> ";"
+<update_stmt> ::= " "
+<delete_stmt> ::= " "
+<select_stmt> ::= " "
+
+<columns_def> ::= <column_def> | <columns_def>  <spaces> "," <spaces> <column_def>
+<column_def> ::= <fields_name> <spaces>  ":" <spaces> <type>
+
+<spaces> ::= (" "+ | " ")
+<unspaces> ::= <spaces> | E 
+
+<existence> ::= "IF NOT EXISTS" <spaces>
+<table_name> ::= ([a-z] | [A-Z] | [0-9] | "_")+
+<fields_name> ::= <table_name>
+<type> ::= "integer" | "float" | "string" | "boolean"
+
+<values> ::= <integer_value> | <float_value> | <string_value>
+<binary_operator> ::= "*" | "/" | "+" | "-" | "<=" | "<" | ">=" | ">" | "=" | "<>" | "AND" | "OR"
+
+
+<integer_value> ::= [0-9]+
+<float_value> ::= [0-9]+ "." [0-9]+
+<string_value> ::= [\w]*
