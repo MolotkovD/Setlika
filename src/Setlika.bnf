@@ -24,4 +24,4 @@
 
 <integer_value> ::= [0-9]+
 <float_value> ::= [0-9]+ "." [0-9]+
-<string_value> ::= [\w]*
+<string_value> ::= " "
