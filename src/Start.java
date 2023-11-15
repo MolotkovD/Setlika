@@ -4,6 +4,7 @@ import Parser.SetlikaLexer;
 import Parser.SetlikaParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
+import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.atn.ATN;
 
 
@@ -14,12 +15,7 @@ import java.util.Scanner;
 public class Start {
     public static void main(String[] args) {
 
-        SetlikaLexer lexer = new SetlikaLexer(
-                CharStreams.fromString(
-                        "sasd"
-                )
-        );
-        
+
 
 
 //        String FilePathDebug = "D:\\Users\\molotkov.d\\Desktop\\Setlikatests";
