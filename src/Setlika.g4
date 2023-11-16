@@ -138,7 +138,7 @@ delete_stmt:
 drop_stmt:
     DROP_ object = (INDEX_ | TABLE_ | TRIGGER_ | VIEW_) (
         IF_ EXISTS_
-    )? (schema_name DOT)? any_name
+    )? drop_table_name = any_name
 ;
 
 expr:

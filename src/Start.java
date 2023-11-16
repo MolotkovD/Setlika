@@ -1,19 +1,53 @@
-import FileSystem.FileSystem;
-import GlobalVariables.GlobalVariables;
-import Parser.SetlikaLexer;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
 import Parser.SetlikaParser;
-import org.antlr.v4.runtime.CharStream;
-import org.antlr.v4.runtime.CharStreams;
-import org.antlr.v4.runtime.TokenStream;
-import org.antlr.v4.runtime.atn.ATN;
+import Parser.SetlikaLexer;
+import Parser.SetlikaBaseVisitor;
+
+class Ts implements ParseTreeListener {
+
+    @Override
+    public void visitTerminal(TerminalNode terminalNode) {
 
 
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.Scanner;
+    }
 
+    @Override
+    public void visitErrorNode(ErrorNode errorNode) {}
+
+    @Override
+    public void enterEveryRule(ParserRuleContext parserRuleContext) {
+
+    }
+
+    @Override
+    public void exitEveryRule(ParserRuleContext parserRuleContext) {
+
+    }
+}
 public class Start {
     public static void main(String[] args) {
+
+//        Lexer lexer = new SetlikaLexer(CharStreams.fromString("DROP TABLE AAW;"));
+//        TokenStream tokenStream = new CommonTokenStream(lexer);
+//        SetlikaParser parser = new SetlikaParser(tokenStream);
+//
+//
+//        parser.setBuildParseTree(true);
+//
+//        ParseTreeVisitor<> s = new SetlikaBaseVisitor();
+//
+//        ParseTree parseTree = parser.parse();
+//        ParseTreeWalker walker = new ParseTreeWalker();
+//        ParseTreeListener s = new Ts();
+//
+//        walker.walk(
+//                s, parseTree
+//        );
+
+
+
+
 
 
 
@@ -53,5 +87,8 @@ public class Start {
 //        catch (IOException error){
 //            System.out.println(error.getMessage());
 //        }
+
+
     }
+
 }
