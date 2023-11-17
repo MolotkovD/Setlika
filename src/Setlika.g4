@@ -13,29 +13,14 @@ sql_stmt_list:
     SCOL* sql_stmt (SCOL+ sql_stmt)* SCOL*
 ;
 
-sql_stmt: (EXPLAIN_ (QUERY_ PLAN_)?)? (
-        alter_table_stmt
-        | create_table_stmt
+sql_stmt
+        : create_table_stmt
         | delete_stmt
         | drop_stmt
         | insert_stmt
         | select_stmt
-        | update_stmt
         | vacuum_stmt
-    )
-;
-
-alter_table_stmt:
-    ALTER_ TABLE_ table_name (
-        RENAME_ (
-            TO_ new_table_name = table_name
-            | COLUMN_? old_column_name = column_name TO_ new_column_name = column_name
-        )
-        | ADD_ COLUMN_? column_def
-        | DROP_ COLUMN_? column_name
-    )
-;
-
+        ;
 
 
 indexed_column: (column_name | expr) (COLLATE_ collation_name)? asc_desc?
@@ -121,9 +106,7 @@ cte_table_name:
     table_name (OPEN_PAR column_name ( COMMA column_name)* CLOSE_PAR)?
 ;
 
-recursive_cte:
-    cte_table_name AS_ OPEN_PAR initial_select UNION_ ALL_? recursive_select CLOSE_PAR
-;
+
 
 common_table_expression:
     table_name (OPEN_PAR column_name ( COMMA column_name)* CLOSE_PAR)? AS_ OPEN_PAR select_stmt CLOSE_PAR
@@ -251,11 +234,6 @@ upsert_clause:
     )
 ;
 
-pragma_value:
-    signed_number
-    | name
-    | STRING_LITERAL
-;
 
 
 select_stmt:
@@ -319,15 +297,7 @@ compound_operator:
     | EXCEPT_
 ;
 
-update_stmt:
-    with_clause? UPDATE_ (
-        OR_ (ROLLBACK_ | ABORT_ | REPLACE_ | FAIL_ | IGNORE_)
-    )? qualified_table_name SET_ (column_name | column_name_list) ASSIGN expr (
-        COMMA (column_name | column_name_list) ASSIGN expr
-    )* (
-        FROM_ (table_or_subquery (COMMA table_or_subquery)* | join_clause)
-    )? (WHERE_ expr)? returning_clause?
-;
+
 
 column_name_list:
     OPEN_PAR column_name (COMMA column_name)* CLOSE_PAR
@@ -380,20 +350,7 @@ frame_clause: (RANGE_ | ROWS_ | GROUPS_) (
     )
 ;
 
-simple_function_invocation:
-    simple_func OPEN_PAR (expr (COMMA expr)* | STAR) CLOSE_PAR
-;
 
-aggregate_function_invocation:
-    aggregate_func OPEN_PAR (DISTINCT_? expr (COMMA expr)* | STAR)? CLOSE_PAR filter_clause?
-;
-
-window_function_invocation:
-    window_function OPEN_PAR (expr (COMMA expr)* | STAR)? CLOSE_PAR filter_clause? OVER_ (
-        window_defn
-        | window_name
-    )
-;
 
 common_table_stmt: //additional structures
     WITH_ RECURSIVE_? common_table_expression (COMMA common_table_expression)*
@@ -436,53 +393,6 @@ frame_single:
     | CURRENT_ ROW_
 ;
 
-// unknown
-
-window_function:
-    (FIRST_VALUE_ | LAST_VALUE_) OPEN_PAR expr CLOSE_PAR OVER_ OPEN_PAR partition_by? order_by_expr_asc_desc frame_clause
-        ? CLOSE_PAR
-    | (CUME_DIST_ | PERCENT_RANK_) OPEN_PAR CLOSE_PAR OVER_ OPEN_PAR partition_by? order_by_expr? CLOSE_PAR
-    | (DENSE_RANK_ | RANK_ | ROW_NUMBER_) OPEN_PAR CLOSE_PAR OVER_ OPEN_PAR partition_by? order_by_expr_asc_desc
-        CLOSE_PAR
-    | (LAG_ | LEAD_) OPEN_PAR expr offset? default_value? CLOSE_PAR OVER_ OPEN_PAR partition_by?
-        order_by_expr_asc_desc CLOSE_PAR
-    | NTH_VALUE_ OPEN_PAR expr COMMA signed_number CLOSE_PAR OVER_ OPEN_PAR partition_by? order_by_expr_asc_desc
-        frame_clause? CLOSE_PAR
-    | NTILE_ OPEN_PAR expr CLOSE_PAR OVER_ OPEN_PAR partition_by? order_by_expr_asc_desc CLOSE_PAR
-;
-
-offset:
-    COMMA signed_number
-;
-
-default_value:
-    COMMA signed_number
-;
-
-partition_by:
-    PARTITION_ BY_ expr+
-;
-
-order_by_expr:
-    ORDER_ BY_ expr+
-;
-
-order_by_expr_asc_desc:
-    ORDER_ BY_ expr_asc_desc
-;
-
-expr_asc_desc:
-    expr asc_desc? (COMMA expr asc_desc?)*
-;
-
-//TODO BOTH OF THESE HAVE TO BE REWORKED TO FOLLOW THE SPEC
-initial_select:
-    select_stmt
-;
-
-recursive_select:
-    select_stmt
-;
 
 unary_operator:
     MINUS
@@ -495,10 +405,7 @@ error_message:
     STRING_LITERAL
 ;
 
-module_argument: // TODO check what exactly is permitted here
-    expr
-    | column_def
-;
+
 
 column_alias:
     IDENTIFIER
@@ -681,9 +588,7 @@ table_name:
     any_name
 ;
 
-table_or_index_name:
-    any_name
-;
+
 
 column_name:
     any_name
@@ -701,33 +606,12 @@ index_name:
     any_name
 ;
 
-trigger_name:
-    any_name
-;
-
-view_name:
-    any_name
-;
-
-module_name:
-    any_name
-;
-
-pragma_name:
-    any_name
-;
-
-savepoint_name:
-    any_name
-;
 
 table_alias:
     any_name
 ;
 
-transaction_name:
-    any_name
-;
+
 
 window_name:
     any_name
@@ -745,13 +629,7 @@ base_window_name:
     any_name
 ;
 
-simple_func:
-    any_name
-;
 
-aggregate_func:
-    any_name
-;
 
 table_function_name:
     any_name

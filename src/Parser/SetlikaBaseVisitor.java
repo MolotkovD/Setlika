@@ -1,4 +1,5 @@
-package Parser;// Generated from Setlika.g4 by ANTLR 4.13.1
+// Generated from Setlika.g4 by ANTLR 4.13.1
+package Parser;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**

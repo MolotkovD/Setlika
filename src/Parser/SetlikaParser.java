@@ -237,9 +237,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_parse; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitParse(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterParse(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitParse(this);
 		}
 	}
 
@@ -296,9 +299,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_sql_stmt_list; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitSql_stmt_list(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterSql_stmt_list(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitSql_stmt_list(this);
 		}
 	}
 
@@ -419,9 +425,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_sql_stmt; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitSql_stmt(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterSql_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitSql_stmt(this);
 		}
 	}
 
@@ -551,9 +560,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_alter_table_stmt; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitAlter_table_stmt(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterAlter_table_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitAlter_table_stmt(this);
 		}
 	}
 
@@ -682,9 +694,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_indexed_column; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitIndexed_column(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterIndexed_column(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitIndexed_column(this);
 		}
 	}
 
@@ -750,6 +765,7 @@ public class SetlikaParser extends Parser {
 	public static class Create_table_stmtContext extends ParserRuleContext {
 		public TerminalNode CREATE_() { return getToken(SetlikaParser.CREATE_, 0); }
 		public TerminalNode TABLE_() { return getToken(SetlikaParser.TABLE_, 0); }
+		public Table_nameContext TableName;
 		public Table_nameContext table_name() {
 			return getRuleContext(Table_nameContext.class,0);
 		}
@@ -779,9 +795,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_create_table_stmt; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitCreate_table_stmt(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterCreate_table_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitCreate_table_stmt(this);
 		}
 	}
 
@@ -885,9 +904,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_column_def; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitColumn_def(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterColumn_def(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitColumn_def(this);
 		}
 	}
 
@@ -959,9 +981,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_type_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitType_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterType_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitType_name(this);
 		}
 	}
 
@@ -1081,9 +1106,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_column_constraint; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitColumn_constraint(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterColumn_constraint(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitColumn_constraint(this);
 		}
 	}
 
@@ -1321,9 +1349,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_signed_number; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitSigned_number(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterSigned_number(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitSigned_number(this);
 		}
 	}
 
@@ -1410,9 +1441,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_table_constraint; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitTable_constraint(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterTable_constraint(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitTable_constraint(this);
 		}
 	}
 
@@ -1633,9 +1667,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_foreign_key_clause; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitForeign_key_clause(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterForeign_key_clause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitForeign_key_clause(this);
 		}
 	}
 
@@ -1829,9 +1866,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_conflict_clause; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitConflict_clause(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterConflict_clause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitConflict_clause(this);
 		}
 	}
 
@@ -1906,9 +1946,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_with_clause; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitWith_clause(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterWith_clause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitWith_clause(this);
 		}
 	}
 
@@ -2000,9 +2043,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_cte_table_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitCte_table_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterCte_table_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitCte_table_name(this);
 		}
 	}
 
@@ -2079,9 +2125,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_recursive_cte; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitRecursive_cte(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterRecursive_cte(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitRecursive_cte(this);
 		}
 	}
 
@@ -2161,9 +2210,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_common_table_expression; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitCommon_table_expression(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterCommon_table_expression(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitCommon_table_expression(this);
 		}
 	}
 
@@ -2249,9 +2301,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_delete_stmt; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitDelete_stmt(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterDelete_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitDelete_stmt(this);
 		}
 	}
 
@@ -2332,9 +2387,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_drop_stmt; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitDrop_stmt(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterDrop_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitDrop_stmt(this);
 		}
 	}
 
@@ -2496,9 +2554,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_expr; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitExpr(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterExpr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitExpr(this);
 		}
 	}
 
@@ -3455,9 +3516,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_raise_function; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitRaise_function(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterRaise_function(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitRaise_function(this);
 		}
 	}
 
@@ -3535,9 +3599,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_literal_value; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitLiteral_value(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterLiteral_value(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitLiteral_value(this);
 		}
 	}
 
@@ -3590,9 +3657,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_value_row; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitValue_row(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterValue_row(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitValue_row(this);
 		}
 	}
 
@@ -3656,9 +3726,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_values_clause; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitValues_clause(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterValues_clause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitValues_clause(this);
 		}
 	}
 
@@ -3757,9 +3830,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_insert_stmt; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitInsert_stmt(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterInsert_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitInsert_stmt(this);
 		}
 	}
 
@@ -3961,9 +4037,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_returning_clause; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitReturning_clause(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterReturning_clause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitReturning_clause(this);
 		}
 	}
 
@@ -4058,9 +4137,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_upsert_clause; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitUpsert_clause(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterUpsert_clause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitUpsert_clause(this);
 		}
 	}
 
@@ -4234,9 +4316,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_pragma_value; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitPragma_value(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterPragma_value(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitPragma_value(this);
 		}
 	}
 
@@ -4309,9 +4394,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_select_stmt; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitSelect_stmt(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterSelect_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitSelect_stmt(this);
 		}
 	}
 
@@ -4411,9 +4499,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_join_clause; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitJoin_clause(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterJoin_clause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitJoin_clause(this);
 		}
 	}
 
@@ -4529,9 +4620,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_select_core; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitSelect_core(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterSelect_core(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitSelect_core(this);
 		}
 	}
 
@@ -4795,9 +4889,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_table_or_subquery; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitTable_or_subquery(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterTable_or_subquery(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitTable_or_subquery(this);
 		}
 	}
 
@@ -5072,9 +5169,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_result_column; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitResult_column(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterResult_column(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitResult_column(this);
 		}
 	}
 
@@ -5158,9 +5258,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_join_operator; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitJoin_operator(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterJoin_operator(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitJoin_operator(this);
 		}
 	}
 
@@ -5275,9 +5378,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_join_constraint; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitJoin_constraint(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterJoin_constraint(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitJoin_constraint(this);
 		}
 	}
 
@@ -5353,9 +5459,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_compound_operator; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitCompound_operator(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterCompound_operator(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitCompound_operator(this);
 		}
 	}
 
@@ -5474,9 +5583,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_update_stmt; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitUpdate_stmt(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterUpdate_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitUpdate_stmt(this);
 		}
 	}
 
@@ -5673,9 +5785,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_column_name_list; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitColumn_name_list(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterColumn_name_list(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitColumn_name_list(this);
 		}
 	}
 
@@ -5745,9 +5860,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_qualified_table_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitQualified_table_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterQualified_table_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitQualified_table_name(this);
 		}
 	}
 
@@ -5851,9 +5969,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_vacuum_stmt; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitVacuum_stmt(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterVacuum_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitVacuum_stmt(this);
 		}
 	}
 
@@ -5905,9 +6026,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_filter_clause; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitFilter_clause(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterFilter_clause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitFilter_clause(this);
 		}
 	}
 
@@ -5977,9 +6101,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_window_defn; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitWindow_defn(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterWindow_defn(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitWindow_defn(this);
 		}
 	}
 
@@ -6122,9 +6249,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_over_clause; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitOver_clause(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterOver_clause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitOver_clause(this);
 		}
 	}
 
@@ -6265,9 +6395,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_frame_spec; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitFrame_spec(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterFrame_spec(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitFrame_spec(this);
 		}
 	}
 
@@ -6358,9 +6491,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_frame_clause; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitFrame_clause(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterFrame_clause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitFrame_clause(this);
 		}
 	}
 
@@ -6439,9 +6575,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_simple_function_invocation; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitSimple_function_invocation(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterSimple_function_invocation(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitSimple_function_invocation(this);
 		}
 	}
 
@@ -6695,9 +6834,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_aggregate_function_invocation; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitAggregate_function_invocation(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterAggregate_function_invocation(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitAggregate_function_invocation(this);
 		}
 	}
 
@@ -6979,9 +7121,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_window_function_invocation; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitWindow_function_invocation(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterWindow_function_invocation(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitWindow_function_invocation(this);
 		}
 	}
 
@@ -7257,9 +7402,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_common_table_stmt; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitCommon_table_stmt(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterCommon_table_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitCommon_table_stmt(this);
 		}
 	}
 
@@ -7332,9 +7480,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_order_by_stmt; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitOrder_by_stmt(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterOrder_by_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitOrder_by_stmt(this);
 		}
 	}
 
@@ -7396,9 +7547,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_limit_stmt; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitLimit_stmt(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterLimit_stmt(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitLimit_stmt(this);
 		}
 	}
 
@@ -7466,9 +7620,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_ordering_term; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitOrdering_term(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterOrdering_term(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitOrdering_term(this);
 		}
 	}
 
@@ -7545,9 +7702,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_asc_desc; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitAsc_desc(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterAsc_desc(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitAsc_desc(this);
 		}
 	}
 
@@ -7596,9 +7756,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_frame_left; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitFrame_left(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterFrame_left(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitFrame_left(this);
 		}
 	}
 
@@ -7673,9 +7836,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_frame_right; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitFrame_right(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterFrame_right(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitFrame_right(this);
 		}
 	}
 
@@ -7749,9 +7915,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_frame_single; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitFrame_single(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterFrame_single(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitFrame_single(this);
 		}
 	}
 
@@ -7854,9 +8023,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_window_function; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitWindow_function(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterWindow_function(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitWindow_function(this);
 		}
 	}
 
@@ -8165,9 +8337,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_offset; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitOffset(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterOffset(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitOffset(this);
 		}
 	}
 
@@ -8205,9 +8380,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_default_value; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitDefault_value(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterDefault_value(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitDefault_value(this);
 		}
 	}
 
@@ -8249,9 +8427,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_partition_by; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitPartition_by(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterPartition_by(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitPartition_by(this);
 		}
 	}
 
@@ -8314,9 +8495,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_order_by_expr; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitOrder_by_expr(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterOrder_by_expr(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitOrder_by_expr(this);
 		}
 	}
 
@@ -8370,9 +8554,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_order_by_expr_asc_desc; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitOrder_by_expr_asc_desc(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterOrder_by_expr_asc_desc(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitOrder_by_expr_asc_desc(this);
 		}
 	}
 
@@ -8424,9 +8611,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_expr_asc_desc; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitExpr_asc_desc(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterExpr_asc_desc(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitExpr_asc_desc(this);
 		}
 	}
 
@@ -8498,9 +8688,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_initial_select; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitInitial_select(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterInitial_select(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitInitial_select(this);
 		}
 	}
 
@@ -8535,9 +8728,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_recursive_select; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitRecursive_select(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterRecursive_select(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitRecursive_select(this);
 		}
 	}
 
@@ -8573,9 +8769,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_unary_operator; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitUnary_operator(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterUnary_operator(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitUnary_operator(this);
 		}
 	}
 
@@ -8617,9 +8816,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_error_message; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitError_message(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterError_message(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitError_message(this);
 		}
 	}
 
@@ -8657,9 +8859,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_module_argument; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitModule_argument(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterModule_argument(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitModule_argument(this);
 		}
 	}
 
@@ -8706,9 +8911,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_column_alias; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitColumn_alias(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterColumn_alias(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitColumn_alias(this);
 		}
 	}
 
@@ -8904,9 +9112,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_keyword; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitKeyword(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterKeyword(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitKeyword(this);
 		}
 	}
 
@@ -8950,9 +9161,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitName(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterName(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitName(this);
 		}
 	}
 
@@ -8987,9 +9201,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_function_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitFunction_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterFunction_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitFunction_name(this);
 		}
 	}
 
@@ -9024,9 +9241,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_schema_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitSchema_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterSchema_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitSchema_name(this);
 		}
 	}
 
@@ -9061,9 +9281,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_table_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitTable_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterTable_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitTable_name(this);
 		}
 	}
 
@@ -9098,9 +9321,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_table_or_index_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitTable_or_index_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterTable_or_index_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitTable_or_index_name(this);
 		}
 	}
 
@@ -9135,9 +9361,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_column_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitColumn_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterColumn_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitColumn_name(this);
 		}
 	}
 
@@ -9172,9 +9401,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_collation_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitCollation_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterCollation_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitCollation_name(this);
 		}
 	}
 
@@ -9209,9 +9441,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_foreign_table; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitForeign_table(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterForeign_table(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitForeign_table(this);
 		}
 	}
 
@@ -9246,9 +9481,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_index_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitIndex_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterIndex_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitIndex_name(this);
 		}
 	}
 
@@ -9283,9 +9521,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_trigger_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitTrigger_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterTrigger_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitTrigger_name(this);
 		}
 	}
 
@@ -9320,9 +9561,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_view_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitView_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterView_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitView_name(this);
 		}
 	}
 
@@ -9357,9 +9601,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_module_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitModule_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterModule_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitModule_name(this);
 		}
 	}
 
@@ -9394,9 +9641,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_pragma_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitPragma_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterPragma_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitPragma_name(this);
 		}
 	}
 
@@ -9431,9 +9681,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_savepoint_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitSavepoint_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterSavepoint_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitSavepoint_name(this);
 		}
 	}
 
@@ -9468,9 +9721,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_table_alias; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitTable_alias(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterTable_alias(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitTable_alias(this);
 		}
 	}
 
@@ -9505,9 +9761,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_transaction_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitTransaction_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterTransaction_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitTransaction_name(this);
 		}
 	}
 
@@ -9542,9 +9801,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_window_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitWindow_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterWindow_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitWindow_name(this);
 		}
 	}
 
@@ -9579,9 +9841,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_alias; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitAlias(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterAlias(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitAlias(this);
 		}
 	}
 
@@ -9616,9 +9881,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_filename; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitFilename(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterFilename(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitFilename(this);
 		}
 	}
 
@@ -9653,9 +9921,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_base_window_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitBase_window_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterBase_window_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitBase_window_name(this);
 		}
 	}
 
@@ -9690,9 +9961,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_simple_func; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitSimple_func(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterSimple_func(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitSimple_func(this);
 		}
 	}
 
@@ -9727,9 +10001,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_aggregate_func; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitAggregate_func(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterAggregate_func(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitAggregate_func(this);
 		}
 	}
 
@@ -9764,9 +10041,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_table_function_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitTable_function_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterTable_function_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitTable_function_name(this);
 		}
 	}
 
@@ -9808,9 +10088,12 @@ public class SetlikaParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_any_name; }
 		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SetlikaVisitor ) return ((SetlikaVisitor<? extends T>)visitor).visitAny_name(this);
-			else return visitor.visitChildren(this);
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).enterAny_name(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof SetlikaListener ) ((SetlikaListener)listener).exitAny_name(this);
 		}
 	}
 
