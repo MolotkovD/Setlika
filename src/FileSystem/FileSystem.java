@@ -1,10 +1,19 @@
 package FileSystem;
 
 import GlobalVariables.GlobalVariables;
+import STypes.EntryCol;
+import STypes.Types;
 
 import java.io.*;
+import java.nio.Buffer;
+import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Objects;
 
 
 public class FileSystem {
@@ -22,7 +31,7 @@ public class FileSystem {
             Path MetaFile = Files.createFile(localDirectory.resolve(name + ".sl" ));
             try (OutputStream s = new FileOutputStream(MetaFile.toString(), true)){
                 s.write(GlobalVariables.SLVersion.getBytes());
-                s.write(new byte[]{0});
+                s.write(0);
                 s.write(name.getBytes());
                 GlobalVariables.MetaDataBase = MetaFile;
             }
@@ -36,17 +45,65 @@ public class FileSystem {
 
     }
 
-    public void CreateNewTable(String name) throws IOException{
+    public void CreateNewTable(String name, List<EntryCol> fields) throws IOException{
         Path tempDir = GlobalVariables.TablesFolder.resolve(name);
         Files.createDirectory(tempDir);
         Files.createDirectory(tempDir.resolve("Indices"));
-        Files.createDirectory(tempDir.resolve("Fields"));
+        Path FieldsFolder = Files.createDirectory(tempDir.resolve("Fields"));
         Path metaTable = Files.createFile(tempDir.resolve(
                 name + ".ti"
         ));
+        try {
+
+        OutputStream s = new FileOutputStream(metaTable.toString(), true);
+        for (int i = 0; i < fields.size(); i++) {
+
+            Files.createFile(FieldsFolder.resolve(i + ".ffs"));
+            s.write(  fields.get(i).getName().getBytes() );
+            s.write(0);
+            s.write(  fields.get(i).getByteType() );
+            s.write( ByteBuffer.allocate(8).putInt(fields.get(i).getType().size).array());
+            s.write(0);
+
+        }
+            s.close();
+        } catch (IOException exception){
+            System.out.println("ERROR!");
+            Files.deleteIfExists(
+              tempDir
+            );
+        }
+
+    }
+
+    public void DeleteTable(String name) throws IOException{
+        Files
+                .walk(GlobalVariables.TablesFolder.resolve(name))
+                .sorted(Comparator.reverseOrder())
+                .forEach(path -> {
+                    try {
+                        Files.delete(path);  //delete each file or directory
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+    }
 
 
 
+    public void InsertData(String TableName, List<Types> values) throws IOException {
+        for (Types value: values) {
+
+        }
+        if (!Files.exists(GlobalVariables.TablesFolder.resolve(TableName)))
+            return;
+
+        Path meta = GlobalVariables.TablesFolder.resolve(TableName).resolve(TableName + ".ti");
+        InputStream inputStreamReader = new FileInputStream(meta.toString());
+        for (int cha = 0; cha < Files.size(meta); cha ++){
+            System.out.print(cha);
+        }
+        inputStreamReader.close();
     }
 
 }
