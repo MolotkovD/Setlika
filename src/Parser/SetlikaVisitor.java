@@ -1,5 +1,5 @@
-// Generated from Setlika.g4 by ANTLR 4.13.1
 package Parser;
+// Generated from Setlika.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -208,6 +208,12 @@ public interface SetlikaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitText(SetlikaParser.TextContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SetlikaParser#bool}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBool(SetlikaParser.BoolContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SetlikaParser#identifier}.
 	 * @param ctx the parse tree

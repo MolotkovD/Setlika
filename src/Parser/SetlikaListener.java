@@ -1,5 +1,5 @@
-// Generated from Setlika.g4 by ANTLR 4.13.1
 package Parser;
+// Generated from Setlika.g4 by ANTLR 4.13.1
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -337,6 +337,16 @@ public interface SetlikaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitText(SetlikaParser.TextContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SetlikaParser#bool}.
+	 * @param ctx the parse tree
+	 */
+	void enterBool(SetlikaParser.BoolContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SetlikaParser#bool}.
+	 * @param ctx the parse tree
+	 */
+	void exitBool(SetlikaParser.BoolContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SetlikaParser#identifier}.
 	 * @param ctx the parse tree

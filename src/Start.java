@@ -1,5 +1,6 @@
 import Exp.CREATE_TABLE;
 import Exp.DROP_TABLE;
+import Exp.INSERT_INTO;
 import GlobalVariables.GlobalVariables;
 import STypes.*;
 import org.antlr.v4.runtime.*;
@@ -62,12 +63,49 @@ class Listener extends SetlikaBaseListener {
 
     @Override
     public void enterInsert_stmt(Insert_stmtContext ctx) {
+        String table_name = ctx.table_name().getText();
+        List<Types> value = new ArrayList<Types>();
+        for (ExprContext item : ctx.values().value(0).expressions().expr()) {
+            if ( item.literal().integer() != null){
+                value.add(
+                        new INT(
+                                Integer.parseInt(item.literal().integer().getText())
+                        )
+                );
+            } else if (item.literal().float_() != null) {
+                value.add(
+                        new FLOAT(
+                                Float.parseFloat(item.literal().float_().getText())
+                        )
+                );
+            } else if (item.literal().bool() != null) {
+                value.add(
+                        new BOOL(
+                                Boolean.parseBoolean(item.literal().bool().getText())
+                        )
+                );
+            } else if (item.literal().text() != null) {
+                String str = item.literal().text().getText().split("\'")[1];
+                value.add(
+                        new STR(
+                                str
+                        )
+                );
+            }
+
+
+
+        }
+        new INSERT_INTO(
+                table_name, value
+        );
 
     }
 }
 
 public class Start {
     public static void main(String[] args) {
+        System.out.print(Integer.BYTES);
         FileSystem fs = new FileSystem();
         Scanner scan = new Scanner(System.in);
         String FilePathDebug = "C:\\Users\\user\\Desktop\\qwwe";
@@ -77,14 +115,23 @@ public class Start {
                 Paths.get(FilePathDebug),
                 scan.nextLine()
         );
+        ParseTreeWalker walker = new ParseTreeWalker();
         while (true) {
-            Lexer lexer = new SetlikaLexer(CharStreams.fromString(scan.nextLine()));
+            String inputStr = scan.nextLine();
+            if (inputStr.equals("ex")){
+                return;
+            }
+
+            Lexer lexer = new SetlikaLexer(CharStreams.fromString(inputStr));
             TokenStream tokenStream = new CommonTokenStream(lexer);
+
+
+
             SetlikaParser parser = new SetlikaParser(tokenStream);
+
             StmtContext cst = parser.stmt();
             parser.setBuildParseTree(true);
 
-            ParseTreeWalker walker = new ParseTreeWalker();
             walker.walk(
                     new Listener(), cst
             );

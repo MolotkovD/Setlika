@@ -56,22 +56,32 @@ public class FileSystem {
         try {
 
         OutputStream s = new FileOutputStream(metaTable.toString(), true);
+        s.write(
+                ByteBuffer.allocate(4).putInt(fields.size()).array()
+        );
         for (int i = 0; i < fields.size(); i++) {
 
             Files.createFile(FieldsFolder.resolve(i + ".ffs"));
             s.write(  fields.get(i).getName().getBytes() );
-            s.write(0);
-            s.write(  fields.get(i).getByteType() );
-            s.write( ByteBuffer.allocate(8).putInt(fields.get(i).getType().size).array());
-            s.write(0);
+            s.write(3);
+            s.write(fields.get(i).getByteType());
+            s.write( ByteBuffer.allocate(4).putInt(fields.get(i).getType().size).array());
+            s.write(4);
 
         }
             s.close();
         } catch (IOException exception){
             System.out.println("ERROR!");
-            Files.deleteIfExists(
-              tempDir
-            );
+            Files
+                    .walk(tempDir)
+                    .sorted(Comparator.reverseOrder())
+                    .forEach(path -> {
+                        try {
+                            Files.delete(path);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
         }
 
     }
@@ -82,7 +92,7 @@ public class FileSystem {
                 .sorted(Comparator.reverseOrder())
                 .forEach(path -> {
                     try {
-                        Files.delete(path);  //delete each file or directory
+                        Files.delete(path);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -92,17 +102,25 @@ public class FileSystem {
 
 
     public void InsertData(String TableName, List<Types> values) throws IOException {
-        for (Types value: values) {
 
-        }
         if (!Files.exists(GlobalVariables.TablesFolder.resolve(TableName)))
             return;
-
-        Path meta = GlobalVariables.TablesFolder.resolve(TableName).resolve(TableName + ".ti");
+        Path local_dir = GlobalVariables.TablesFolder.resolve(TableName);
+        Path meta = local_dir.resolve(TableName + ".ti");
         InputStream inputStreamReader = new FileInputStream(meta.toString());
-        for (int cha = 0; cha < Files.size(meta); cha ++){
-            System.out.print(cha);
+        if (ByteBuffer.wrap(inputStreamReader.readNBytes(4)).getInt() != values.size()){
+            inputStreamReader.close();
+            return;
+        };
+
+        for (int index = 0; index < values.size(); index++) {
+            OutputStream writer = new FileOutputStream
+                    (local_dir.resolve("Fields").resolve(index + ".ffs").toString(), true);
+            writer.write(values.get(index).getConvertValue());
+            writer.close();
         }
+
+
         inputStreamReader.close();
     }
 

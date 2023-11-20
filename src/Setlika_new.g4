@@ -85,9 +85,6 @@ column_def
     : column_name ':' type (primary_key)?
     ;
 
-columns_names
-    :  column_name (',' column_name)*
-    ;
 
 column_name
     : identifier
@@ -106,20 +103,17 @@ primary_key
     ;
 
 values
-    : (value ',')* value
+    : '(' (value ',')* value ')'
     ;
 
 value
-    : '(' expressions ')'
+    : literal
     ;
 
-expressions
-    : (expr ',')* expr
-    ;
 
 expr
-    : column_name
-    | literal
+    : literal
+    | column_name
     | '(' expr ')'
     | expr binary_operator expr
     ;
@@ -144,15 +138,19 @@ binary_operator
     ;
 
 literal
-    :integer
-    |float
-    |text
+    : integer
+    | float
+    | text
+    | bool
     ;
 
 integer: NUMBER;
 float: NUMBER '.' NUMBER;
 text: '\'' .*? '\'';
+bool: 'True' | 'False';
+
 identifier: ID;
+
 NUMBER: [0-9]+;
 ID: [a-zA-Z]+;
 SCOL: ';';
