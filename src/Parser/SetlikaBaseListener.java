@@ -244,18 +244,6 @@ public class SetlikaBaseListener implements SetlikaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterColumns_names(SetlikaParser.Columns_namesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitColumns_names(SetlikaParser.Columns_namesContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterColumn_name(SetlikaParser.Column_nameContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -311,18 +299,6 @@ public class SetlikaBaseListener implements SetlikaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitValue(SetlikaParser.ValueContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterExpressions(SetlikaParser.ExpressionsContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExpressions(SetlikaParser.ExpressionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -125,12 +125,6 @@ public interface SetlikaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitColumn_def(SetlikaParser.Column_defContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SetlikaParser#columns_names}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitColumns_names(SetlikaParser.Columns_namesContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link SetlikaParser#column_name}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -160,12 +154,6 @@ public interface SetlikaVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValue(SetlikaParser.ValueContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link SetlikaParser#expressions}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExpressions(SetlikaParser.ExpressionsContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SetlikaParser#expr}.
 	 * @param ctx the parse tree

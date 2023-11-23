@@ -13,6 +13,7 @@ import FileSystem.FileSystem;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -64,48 +65,75 @@ class Listener extends SetlikaBaseListener {
     @Override
     public void enterInsert_stmt(Insert_stmtContext ctx) {
         String table_name = ctx.table_name().getText();
-        List<Types> value = new ArrayList<Types>();
-        for (ExprContext item : ctx.values().value(0).expressions().expr()) {
-            if ( item.literal().integer() != null){
-                value.add(
-                        new INT(
-                                Integer.parseInt(item.literal().integer().getText())
-                        )
-                );
-            } else if (item.literal().float_() != null) {
-                value.add(
-                        new FLOAT(
-                                Float.parseFloat(item.literal().float_().getText())
-                        )
-                );
-            } else if (item.literal().bool() != null) {
-                value.add(
-                        new BOOL(
-                                Boolean.parseBoolean(item.literal().bool().getText())
-                        )
-                );
-            } else if (item.literal().text() != null) {
-                String str = item.literal().text().getText().split("\'")[1];
-                value.add(
-                        new STR(
-                                str
-                        )
-                );
+        List<Types> value;
+        for (ValueContext valueContext: ctx.values().value()) {
+            value = new ArrayList<>();
+            for (LiteralContext literal :
+                    valueContext.literal()) {
+                if (literal.integer() != null){
+                    value.add(
+                            new INT(
+                                    Integer.parseInt(literal.integer().getText())
+                            )
+                    );
+                } else if (literal.float_() != null) {
+                    value.add(
+                            new FLOAT(
+                                    Float.parseFloat(literal.float_().getText())
+                            )
+                    );
+                } else if (literal.bool() != null) {
+                    value.add(
+                            new BOOL(
+                                    Boolean.parseBoolean(literal.bool().getText())
+                            )
+                    );
+                } else if (literal.text() != null) {
+                    String str = literal.text().getText().split("'")[1];
+                    value.add(
+                            new STR(
+                                    str
+                            )
+                    );
+                }
+
+
+
+            }
+            new INSERT_INTO(
+                    table_name, value
+            );
             }
 
 
+//
+//        }
+
 
         }
-        new INSERT_INTO(
-                table_name, value
-        );
-
-    }
 }
+
 
 public class Start {
     public static void main(String[] args) {
-        System.out.print(Integer.BYTES);
+        //<editor-fold desc="Logo">
+        System.out.println(
+                """
+                   ╔══════════════════════════════════════════════════════╗
+                   ║                                                      ║
+                   ║ ███████╗███████╗████████╗██╗     ██╗██╗  ██╗ █████╗  ║
+                   ║ ██╔════╝██╔════╝╚══██╔══╝██║     ██║██║ ██╔╝██╔══██╗ ║
+                   ║ ███████╗█████╗     ██║   ██║     ██║█████╔╝ ███████║ ║
+                   ║ ╚════██║██╔══╝     ██║   ██║     ██║██╔═██╗ ██╔══██║ ║
+                   ║ ███████║███████╗   ██║   ███████╗██║██║  ██╗██║  ██║ ║
+                   ║ ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ║
+                   ║                                                      ║
+                   ║ Version: SL1.00  *                                   ║
+                   ║                                                      ║
+                   ╚══════════════════════════════════════════════════════╝"""
+        );
+        //</editor-fold>
+
         FileSystem fs = new FileSystem();
         Scanner scan = new Scanner(System.in);
         String FilePathDebug = "C:\\Users\\user\\Desktop\\qwwe";
@@ -145,23 +173,7 @@ public class Start {
 
 
 //
-//        //<editor-fold desc="Logo">
-//        System.out.println(
-//                """
-//                   ╔══════════════════════════════════════════════════════╗
-//                   ║                                                      ║
-//                   ║ ███████╗███████╗████████╗██╗     ██╗██╗  ██╗ █████╗  ║
-//                   ║ ██╔════╝██╔════╝╚══██╔══╝██║     ██║██║ ██╔╝██╔══██╗ ║
-//                   ║ ███████╗█████╗     ██║   ██║     ██║█████╔╝ ███████║ ║
-//                   ║ ╚════██║██╔══╝     ██║   ██║     ██║██╔═██╗ ██╔══██║ ║
-//                   ║ ███████║███████╗   ██║   ███████╗██║██║  ██╗██║  ██║ ║
-//                   ║ ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ║
-//                   ║                                                      ║
-//                   ║ Version: SL1.00  *                                   ║
-//                   ║                                                      ║
-//                   ╚══════════════════════════════════════════════════════╝"""
-//        );
-//        //</editor-fold>
+
 
 
 

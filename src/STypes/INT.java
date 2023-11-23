@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 public class INT extends Types {
     public INT(){
         this.byte_type = 1;
-        this.size = 8;
+        this.size = Integer.BYTES;
     }
 
     public INT(int val){

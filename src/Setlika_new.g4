@@ -103,11 +103,11 @@ primary_key
     ;
 
 values
-    : '(' (value ',')* value ')'
+    : value (',' value)*
     ;
 
 value
-    : literal
+    : '(' literal (',' literal)* ')'
     ;
 
 

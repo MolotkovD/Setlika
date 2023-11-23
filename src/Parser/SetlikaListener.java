@@ -198,16 +198,6 @@ public interface SetlikaListener extends ParseTreeListener {
 	 */
 	void exitColumn_def(SetlikaParser.Column_defContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SetlikaParser#columns_names}.
-	 * @param ctx the parse tree
-	 */
-	void enterColumns_names(SetlikaParser.Columns_namesContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SetlikaParser#columns_names}.
-	 * @param ctx the parse tree
-	 */
-	void exitColumns_names(SetlikaParser.Columns_namesContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link SetlikaParser#column_name}.
 	 * @param ctx the parse tree
 	 */
@@ -257,16 +247,6 @@ public interface SetlikaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValue(SetlikaParser.ValueContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link SetlikaParser#expressions}.
-	 * @param ctx the parse tree
-	 */
-	void enterExpressions(SetlikaParser.ExpressionsContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link SetlikaParser#expressions}.
-	 * @param ctx the parse tree
-	 */
-	void exitExpressions(SetlikaParser.ExpressionsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SetlikaParser#expr}.
 	 * @param ctx the parse tree

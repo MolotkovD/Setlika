@@ -5,7 +5,7 @@ import java.nio.ByteBuffer;
 public class FLOAT extends Types{
     public FLOAT(){
         this.byte_type = 3;
-        this.size = 4;
+        this.size = Float.BYTES;
     }
 
     public FLOAT(float val){

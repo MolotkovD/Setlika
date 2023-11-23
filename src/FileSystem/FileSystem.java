@@ -10,10 +10,7 @@ import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 public class FileSystem {
@@ -63,11 +60,9 @@ public class FileSystem {
 
             Files.createFile(FieldsFolder.resolve(i + ".ffs"));
             s.write(  fields.get(i).getName().getBytes() );
-            s.write(3);
+            s.write(0);
             s.write(fields.get(i).getByteType());
             s.write( ByteBuffer.allocate(4).putInt(fields.get(i).getType().size).array());
-            s.write(4);
-
         }
             s.close();
         } catch (IOException exception){
@@ -111,17 +106,58 @@ public class FileSystem {
         if (ByteBuffer.wrap(inputStreamReader.readNBytes(4)).getInt() != values.size()){
             inputStreamReader.close();
             return;
-        };
+        }
+        List<Integer> sizes = getSizeFieldsMetaTable(meta);
 
         for (int index = 0; index < values.size(); index++) {
             OutputStream writer = new FileOutputStream
                     (local_dir.resolve("Fields").resolve(index + ".ffs").toString(), true);
-            writer.write(values.get(index).getConvertValue());
+
+            byte[] value = values.get(index).getConvertValue();
+            value = Arrays.copyOf(value, sizes.get(index));
+            writer.write(value);
             writer.close();
         }
 
 
         inputStreamReader.close();
+    }
+
+    public List<Integer> getSizeFieldsMetaTable(Path meta) throws IOException {
+
+        List<Integer> result = new ArrayList<>();
+
+        InputStream metafile;
+        metafile = new FileInputStream(meta.toString());
+        int count = ByteBuffer.wrap(metafile.readNBytes(4)).getInt();
+
+        metafile.skip(4);
+        for (int i = 0; i < count; i++) {
+            int last = 1;
+            while (last != 0) {
+                last = metafile.read();
+
+            }
+
+            System.out.println(last);
+            metafile.skip(1);
+            byte[] sdd = metafile.readNBytes(4);
+            System.out.println(Arrays.toString(sdd));
+            int res =  ByteBuffer.wrap(sdd).getInt();
+            System.out.println(
+                    res
+            );
+            result.add(
+                res
+            );
+        }
+
+
+
+
+        metafile.close();
+        return result;
+
     }
 
 }
