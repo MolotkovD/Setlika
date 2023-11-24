@@ -1,6 +1,4 @@
-import Exp.CREATE_TABLE;
-import Exp.DROP_TABLE;
-import Exp.INSERT_INTO;
+import Exp.*;
 import GlobalVariables.GlobalVariables;
 import STypes.*;
 import org.antlr.v4.runtime.*;
@@ -11,6 +9,7 @@ import Parser.SetlikaBaseListener;
 import FileSystem.FileSystem;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -111,28 +110,44 @@ class Listener extends SetlikaBaseListener {
 
 
         }
+
+    @Override
+    public void enterSelect_stmt(Select_stmtContext ctx) {
+        new SELECT_DATA(ctx);
+    }
 }
 
 
 public class Start {
     public static void main(String[] args) {
         //<editor-fold desc="Logo">
-        System.out.println(
-                """
-                   ╔══════════════════════════════════════════════════════╗
-                   ║                                                      ║
-                   ║ ███████╗███████╗████████╗██╗     ██╗██╗  ██╗ █████╗  ║
-                   ║ ██╔════╝██╔════╝╚══██╔══╝██║     ██║██║ ██╔╝██╔══██╗ ║
-                   ║ ███████╗█████╗     ██║   ██║     ██║█████╔╝ ███████║ ║
-                   ║ ╚════██║██╔══╝     ██║   ██║     ██║██╔═██╗ ██╔══██║ ║
-                   ║ ███████║███████╗   ██║   ███████╗██║██║  ██╗██║  ██║ ║
-                   ║ ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ║
-                   ║                                                      ║
-                   ║ Version: SL1.00  *                                   ║
-                   ║                                                      ║
-                   ╚══════════════════════════════════════════════════════╝"""
-        );
+//        System.out.println(
+//                """
+//                   ╔══════════════════════════════════════════════════════╗
+//                   ║                                                      ║
+//                   ║ ███████╗███████╗████████╗██╗     ██╗██╗  ██╗ █████╗  ║
+//                   ║ ██╔════╝██╔════╝╚══██╔══╝██║     ██║██║ ██╔╝██╔══██╗ ║
+//                   ║ ███████╗█████╗     ██║   ██║     ██║█████╔╝ ███████║ ║
+//                   ║ ╚════██║██╔══╝     ██║   ██║     ██║██╔═██╗ ██╔══██║ ║
+//                   ║ ███████║███████╗   ██║   ███████╗██║██║  ██╗██║  ██║ ║
+//                   ║ ╚══════╝╚══════╝   ╚═╝   ╚══════╝╚═╝╚═╝  ╚═╝╚═╝  ╚═╝ ║
+//                   ║                                                      ║
+//                   ║ Version: SL1.00  *                                   ║
+//                   ║                                                      ║
+//                   ╚══════════════════════════════════════════════════════╝"""
+//        );
         //</editor-fold>
+
+        System.out.println(
+                ByteBuffer.wrap(
+                        ByteBuffer.allocate(4).putInt(1002).array()
+        ).getInt()
+        );
+
+
+
+        System.out.println();
+
 
         FileSystem fs = new FileSystem();
         Scanner scan = new Scanner(System.in);

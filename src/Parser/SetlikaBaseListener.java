@@ -316,6 +316,18 @@ public class SetlikaBaseListener implements SetlikaListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBinary_expr(SetlikaParser.Binary_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBinary_expr(SetlikaParser.Binary_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterWhere_clause(SetlikaParser.Where_clauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -323,6 +335,18 @@ public class SetlikaBaseListener implements SetlikaListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitWhere_clause(SetlikaParser.Where_clauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBinary_combination(SetlikaParser.Binary_combinationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBinary_combination(SetlikaParser.Binary_combinationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

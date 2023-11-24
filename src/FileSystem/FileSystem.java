@@ -124,39 +124,24 @@ public class FileSystem {
     }
 
     public List<Integer> getSizeFieldsMetaTable(Path meta) throws IOException {
-
         List<Integer> result = new ArrayList<>();
-
         InputStream metafile;
         metafile = new FileInputStream(meta.toString());
         int count = ByteBuffer.wrap(metafile.readNBytes(4)).getInt();
-
-        metafile.skip(4);
         for (int i = 0; i < count; i++) {
             int last = 1;
-            while (last != 0) {
+            while (last != 0)
                 last = metafile.read();
-
-            }
-
-            System.out.println(last);
-            metafile.skip(1);
+            metafile.skipNBytes(1);
             byte[] sdd = metafile.readNBytes(4);
-            System.out.println(Arrays.toString(sdd));
-            int res =  ByteBuffer.wrap(sdd).getInt();
-            System.out.println(
-                    res
-            );
-            result.add(
-                res
-            );
+            result.add(ByteBuffer.wrap(sdd).getInt());
         }
-
-
-
-
         metafile.close();
         return result;
+    }
+
+    public void SelectDataFromTable(String TableName, String FieldName, String Search){
+
 
     }
 

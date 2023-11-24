@@ -1,5 +1,5 @@
-package Parser;
 // Generated from Setlika.g4 by ANTLR 4.13.1
+package Parser;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -161,11 +161,23 @@ public interface SetlikaVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExpr(SetlikaParser.ExprContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link SetlikaParser#binary_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinary_expr(SetlikaParser.Binary_exprContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link SetlikaParser#where_clause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitWhere_clause(SetlikaParser.Where_clauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link SetlikaParser#binary_combination}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinary_combination(SetlikaParser.Binary_combinationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link SetlikaParser#binary_operator}.
 	 * @param ctx the parse tree

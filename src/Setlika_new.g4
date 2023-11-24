@@ -10,7 +10,7 @@ sql_stmt_list
 
 stmt_line
     : create_stmt // +
-    | drop_stmt // +
+    | drop_stmt   // +
     | insert_stmt // +
     | select_stmt // +-
     | vacuum_stmt // +
@@ -37,13 +37,12 @@ select_stmt
     ;
 
 result_columns
-    :                    result_column
-    | result_columns ',' result_column
+    : result_column (',' result_column)*
     ;
 
 result_column
     : '*'
-    | expr
+    | table_name
     ;
 
 from_body
@@ -112,29 +111,29 @@ value
 
 
 expr
-    : literal
-    | column_name
-    | '(' expr ')'
-    | expr binary_operator expr
+    : column_name binary_operator literal
+    ;
+
+binary_expr
+    : expr (binary_combination expr)*
     ;
 
 where_clause
-    : 'WHERE' expr
+    : 'WHERE' binary_expr
+    ;
+
+binary_combination
+    :'AND'
+    |'OR'
     ;
 
 binary_operator
-    :'*'
-    |'/'
-    |'+'
-    |'-'
-    |'<='
-    |'<'
-    |'>='
-    |'>'
-    |'='
-    |'!='
-    |'AND'
-    |'OR'
+    :'<=' // less-equals
+    |'<' // less
+    |'>=' // more-equals
+    |'>' // more
+    |'=' // equals
+    |'!=' // not equals
     ;
 
 literal

@@ -1,5 +1,5 @@
-package Parser;
 // Generated from Setlika.g4 by ANTLR 4.13.1
+package Parser;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
@@ -258,6 +258,16 @@ public interface SetlikaListener extends ParseTreeListener {
 	 */
 	void exitExpr(SetlikaParser.ExprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link SetlikaParser#binary_expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterBinary_expr(SetlikaParser.Binary_exprContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SetlikaParser#binary_expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitBinary_expr(SetlikaParser.Binary_exprContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link SetlikaParser#where_clause}.
 	 * @param ctx the parse tree
 	 */
@@ -267,6 +277,16 @@ public interface SetlikaListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitWhere_clause(SetlikaParser.Where_clauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link SetlikaParser#binary_combination}.
+	 * @param ctx the parse tree
+	 */
+	void enterBinary_combination(SetlikaParser.Binary_combinationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link SetlikaParser#binary_combination}.
+	 * @param ctx the parse tree
+	 */
+	void exitBinary_combination(SetlikaParser.Binary_combinationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link SetlikaParser#binary_operator}.
 	 * @param ctx the parse tree
