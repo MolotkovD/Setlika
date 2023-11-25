@@ -140,7 +140,25 @@ public class FileSystem {
         return result;
     }
 
-    public void SelectDataFromTable(String TableName, String FieldName, String Search){
+    public void SelectDataFromTable(String TableName, String FieldName) throws IOException {
+        Path metapath = GlobalVariables.TablesFolder.resolve(TableName).resolve(TableName + ".ti");
+        if (Files.notExists(metapath)) return;
+        InputStream metafile = new FileInputStream(metapath.toString());
+        int count = ByteBuffer.wrap(metafile.readNBytes(4)).getInt();
+        List<String> namelist = new ArrayList<>();
+        for (int i = 0; i < count; i++){
+            List<Byte> Fields = new ArrayList<>();
+            int last = 1;
+            while (last != 0) {
+                last = metafile.read();
+                Fields.add((byte) last);
+            }
+            metafile.skipNBytes(5);
+            Fields.remove(
+                    Fields.size()-1
+            );
+
+        }
 
 
     }
