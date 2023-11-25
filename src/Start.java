@@ -16,7 +16,27 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+class SyntaxError extends BaseErrorListener{
+    private boolean error;
 
+    public SyntaxError(){
+        super();
+        error = false;
+    }
+
+    @Override
+    public void syntaxError(Recognizer<?, ?> recognizer,
+                            Object offendingSymbol,
+                            int line, int charPositionInLine,
+                            String msg,
+                            RecognitionException e)
+    {
+        this.error = true;
+    }
+    public boolean isError() {
+        return this.error;
+    }
+}
 class Listener extends SetlikaBaseListener {
     @Override
     public void enterDrop_stmt(SetlikaParser.Drop_stmtContext ctx) {
@@ -105,10 +125,6 @@ class Listener extends SetlikaBaseListener {
             }
 
 
-//
-//        }
-
-
         }
 
     @Override
@@ -138,11 +154,7 @@ public class Start {
 //        );
         //</editor-fold>
 
-        System.out.println(
-                ByteBuffer.wrap(
-                        ByteBuffer.allocate(4).putInt(1002).array()
-        ).getInt()
-        );
+
 
 
 
@@ -151,7 +163,7 @@ public class Start {
 
         FileSystem fs = new FileSystem();
         Scanner scan = new Scanner(System.in);
-        String FilePathDebug = "C:\\Users\\user\\Desktop\\qwwe";
+        String FilePathDebug = "D:\\Users\\molotkov.d\\Desktop\\BD";
 
         GlobalVariables.FS = fs;
         fs.InitFileSystem(
@@ -161,18 +173,21 @@ public class Start {
         ParseTreeWalker walker = new ParseTreeWalker();
         while (true) {
             String inputStr = scan.nextLine();
-            if (inputStr.equals("ex")){
-                return;
-            }
+            if (inputStr.equals("ex"))  return;
 
             Lexer lexer = new SetlikaLexer(CharStreams.fromString(inputStr));
+
+            SyntaxError syntaxErrorListener = new SyntaxError();
+
             TokenStream tokenStream = new CommonTokenStream(lexer);
-
-
 
             SetlikaParser parser = new SetlikaParser(tokenStream);
 
+            parser.addErrorListener(syntaxErrorListener);
+
             StmtContext cst = parser.stmt();
+            if (syntaxErrorListener.isError()) continue;
+
             parser.setBuildParseTree(true);
 
             walker.walk(
@@ -180,26 +195,6 @@ public class Start {
             );
 
         }
-
-
-
-
-
-
-
-//
-
-
-
-
-//        try {
-//            List<EntryCol> slist = new ArrayList<EntryCol>();
-//            slist.add( new EntryCol("s", new INT()) );
-//            fs.CreateNewTable("Table1", slist);
-//        }
-//        catch (IOException error){
-//            System.out.println(error.getMessage());
-//        }
 
 
     }
