@@ -8,11 +8,9 @@ import Parser.SetlikaParser.*;
 import Parser.SetlikaBaseListener;
 import FileSystem.FileSystem;
 
-import java.io.IOException;
-import java.nio.ByteBuffer;
+
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -131,6 +129,8 @@ class Listener extends SetlikaBaseListener {
     public void enterSelect_stmt(Select_stmtContext ctx) {
         new SELECT_DATA(ctx);
     }
+
+
 }
 
 
@@ -163,7 +163,7 @@ public class Start {
 
         FileSystem fs = new FileSystem();
         Scanner scan = new Scanner(System.in);
-        String FilePathDebug = "D:\\Users\\molotkov.d\\Desktop\\BD";
+        String FilePathDebug = "C:\\Users\\user\\Desktop\\qwwe";
 
         GlobalVariables.FS = fs;
         fs.InitFileSystem(

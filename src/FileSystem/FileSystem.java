@@ -3,6 +3,8 @@ package FileSystem;
 import GlobalVariables.GlobalVariables;
 import STypes.EntryCol;
 import STypes.Types;
+import org.apache.commons.lang3.StringUtils;
+import until.AsciiArtTable;
 
 import java.io.*;
 import java.nio.Buffer;
@@ -11,6 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class FileSystem {
@@ -59,7 +62,7 @@ public class FileSystem {
         for (int i = 0; i < fields.size(); i++) {
 
             Files.createFile(FieldsFolder.resolve(i + ".ffs"));
-            s.write(  fields.get(i).getName().getBytes() );
+            s.write(  fields.get(i).getName().getBytes(StandardCharsets.UTF_8) );
             s.write(0);
             s.write(fields.get(i).getByteType());
             s.write( ByteBuffer.allocate(4).putInt(fields.get(i).getType().size).array());
@@ -140,14 +143,19 @@ public class FileSystem {
         return result;
     }
 
-    public void SelectDataFromTable(String TableName, String FieldName) throws IOException {
-        Path metapath = GlobalVariables.TablesFolder.resolve(TableName).resolve(TableName + ".ti");
+    public void SelectAllData(String TableName) throws IOException {
+        Path tablepath = GlobalVariables.TablesFolder.resolve(TableName);
+        Path metapath = tablepath.resolve(TableName + ".ti");
         if (Files.notExists(metapath)) return;
         InputStream metafile = new FileInputStream(metapath.toString());
         int count = ByteBuffer.wrap(metafile.readNBytes(4)).getInt();
-        List<String> namelist = new ArrayList<>();
+
+
+
+        AsciiArtTable result_table = new AsciiArtTable();
+
         for (int i = 0; i < count; i++){
-            List<Byte> Fields = new ArrayList<>();
+            List<Byte> Fields = new ArrayList<Byte>();
             int last = 1;
             while (last != 0) {
                 last = metafile.read();
@@ -157,8 +165,26 @@ public class FileSystem {
             Fields.remove(
                     Fields.size()-1
             );
+            byte[] c = new byte[Fields.size()];
+            for (int j = 0; j < Fields.size(); j++) {
+                c[i] = Fields.get(i);
+            }
+            result_table.addHeaderCols(new String(c, StandardCharsets.UTF_8));
 
         }
+
+        Path first_field = tablepath.resolve("Fields").resolve("0.ffs");
+        long size_first =  Files.size(first_field);
+        List<Integer> sizes =  getSizeFieldsMetaTable(metapath);
+
+        if (size_first <= 0){
+            result_table.add("empty");
+            System.out.println(result_table.getOutput());
+            return;
+        }
+
+
+        System.out.println(result_table.getOutput());
 
 
     }
