@@ -1,19 +1,21 @@
 package FileSystem;
 
 import GlobalVariables.GlobalVariables;
+import MetaTypes.MetaData;
 import STypes.EntryCol;
 import STypes.Types;
-import org.apache.commons.lang3.StringUtils;
 import until.AsciiArtTable;
 
 import java.io.*;
-import java.nio.Buffer;
+
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
-import java.util.stream.Collectors;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.Arrays;
 
 
 public class FileSystem {
@@ -60,10 +62,10 @@ public class FileSystem {
                 ByteBuffer.allocate(4).putInt(fields.size()).array()
         );
         for (int i = 0; i < fields.size(); i++) {
-
+            byte[] nameOfBytes = fields.get(i).getName().getBytes(StandardCharsets.UTF_8);
             Files.createFile(FieldsFolder.resolve(i + ".ffs"));
-            s.write(  fields.get(i).getName().getBytes(StandardCharsets.UTF_8) );
-            s.write(0);
+            s.write(ByteBuffer.allocate(4).putInt(nameOfBytes.length).array());
+            s.write(nameOfBytes);
             s.write(fields.get(i).getByteType());
             s.write( ByteBuffer.allocate(4).putInt(fields.get(i).getType().size).array());
         }
@@ -100,93 +102,90 @@ public class FileSystem {
 
 
     public void InsertData(String TableName, List<Types> values) throws IOException {
-
-        if (!Files.exists(GlobalVariables.TablesFolder.resolve(TableName)))
-            return;
         Path local_dir = GlobalVariables.TablesFolder.resolve(TableName);
+        if (Files.notExists(local_dir)) return;
         Path meta = local_dir.resolve(TableName + ".ti");
-        InputStream inputStreamReader = new FileInputStream(meta.toString());
-        if (ByteBuffer.wrap(inputStreamReader.readNBytes(4)).getInt() != values.size()){
-            inputStreamReader.close();
-            return;
-        }
-        List<Integer> sizes = getSizeFieldsMetaTable(meta);
-
+        MetaData[] metaData = ParserTableMeta(meta);
         for (int index = 0; index < values.size(); index++) {
             OutputStream writer = new FileOutputStream
                     (local_dir.resolve("Fields").resolve(index + ".ffs").toString(), true);
-
             byte[] value = values.get(index).getConvertValue();
-            value = Arrays.copyOf(value, sizes.get(index));
+            value = Arrays.copyOf(value, metaData[index].size);
             writer.write(value);
             writer.close();
         }
-
-
-        inputStreamReader.close();
     }
 
-    public List<Integer> getSizeFieldsMetaTable(Path meta) throws IOException {
-        List<Integer> result = new ArrayList<>();
-        InputStream metafile;
-        metafile = new FileInputStream(meta.toString());
-        int count = ByteBuffer.wrap(metafile.readNBytes(4)).getInt();
-        for (int i = 0; i < count; i++) {
-            int last = 1;
-            while (last != 0)
-                last = metafile.read();
-            metafile.skipNBytes(1);
-            byte[] sdd = metafile.readNBytes(4);
-            result.add(ByteBuffer.wrap(sdd).getInt());
-        }
-        metafile.close();
-        return result;
-    }
 
-    public void SelectAllData(String TableName) throws IOException {
+    public void SelectAllData(String TableName, List<String> fieldsList) throws IOException {
+
         Path tablepath = GlobalVariables.TablesFolder.resolve(TableName);
         Path metapath = tablepath.resolve(TableName + ".ti");
+
         if (Files.notExists(metapath)) return;
-        InputStream metafile = new FileInputStream(metapath.toString());
-        int count = ByteBuffer.wrap(metafile.readNBytes(4)).getInt();
-
-
-
+        MetaData[] metaData = ParserTableMeta(metapath);
         AsciiArtTable result_table = new AsciiArtTable();
+        for (MetaData metaDatum : metaData) {
+            if (fieldsList.contains(metaDatum.fieldName) | fieldsList.contains("*"))
+                result_table.addHeaderCols(metaDatum.fieldName);
+        }
+        Path fieldspath = tablepath.resolve("Fields");
+        InputStream[] fieldsStreams = new InputStream[metaData.length];
 
-        for (int i = 0; i < count; i++){
-            List<Byte> Fields = new ArrayList<Byte>();
-            int last = 1;
-            while (last != 0) {
-                last = metafile.read();
-                Fields.add((byte) last);
-            }
-            metafile.skipNBytes(5);
-            Fields.remove(
-                    Fields.size()-1
-            );
-            byte[] c = new byte[Fields.size()];
-            for (int j = 0; j < Fields.size(); j++) {
-                c[i] = Fields.get(i);
-            }
-            result_table.addHeaderCols(new String(c, StandardCharsets.UTF_8));
+        for (int j = 0; j < metaData.length; j++)
+            fieldsStreams[j] = new FileInputStream(fieldspath.resolve(j + ".ffs").toString());
 
+        for (int i = 0; i < Files.size(fieldspath.resolve("0.ffs")) / metaData[0].size; i++) {
+            for (int j = 0; j < metaData.length; j++) {
+                if (!fieldsList.contains(metaData[j].fieldName) | fieldsList.contains("*"))
+                    continue;
+
+                String value = "";
+                byte[] bytes = fieldsStreams[j].readNBytes(metaData[j].size);
+                if (metaData[j].type == 1)
+                    value = String.valueOf(ByteBuffer.wrap(bytes).getInt());
+                if (metaData[j].type == 2) {
+
+                    value = new String(bytes, StandardCharsets.UTF_8).trim();
+                }
+                if (metaData[j].type == 3)
+                    value = String.valueOf(ByteBuffer.wrap(bytes).getFloat());
+                if (metaData[j].type == 4)
+                    value = bytes[0] == 1 ? "True" : "False";
+
+                result_table.add(value);
+            }
         }
 
-        Path first_field = tablepath.resolve("Fields").resolve("0.ffs");
-        long size_first =  Files.size(first_field);
-        List<Integer> sizes =  getSizeFieldsMetaTable(metapath);
-
-        if (size_first <= 0){
-            result_table.add("empty");
-            System.out.println(result_table.getOutput());
-            return;
-        }
-
+        for (int j = 0; j < metaData.length; j++)
+            fieldsStreams[j].close();
 
         System.out.println(result_table.getOutput());
 
+    }
 
+
+    private MetaData[] ParserTableMeta(Path metapath) throws IOException{
+        InputStream metaStream = new FileInputStream(metapath.toString());
+        int countFields = ByteBuffer.wrap(metaStream.readNBytes(4)).getInt();
+        MetaData[] result = new MetaData[countFields];
+        for (int i = 0; i < countFields; i++) {
+            int sizeName = ByteBuffer.wrap(
+                    metaStream.readNBytes(4)
+            ).getInt();
+            String name = new String(
+                    metaStream.readNBytes(sizeName),
+                    StandardCharsets.UTF_8
+            );
+            byte type = (byte) metaStream.read();
+            int size = ByteBuffer.wrap(
+                    metaStream.readNBytes(4)
+            ).getInt();
+
+            result[i] = new MetaData(name, type, size);
+        }
+        metaStream.close();
+        return result;
     }
 
 }

@@ -2,7 +2,7 @@ package STypes;
 
 public class BOOL extends Types {
     public BOOL(){
-        this.byte_type = 5;
+        this.byte_type = 4;
         this.size = 1;
     }
 
